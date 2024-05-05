@@ -5,3 +5,42 @@
   - credentials.yaml
   roles:
   - "{{component}}"
+
+
+#Output:
+
+#1st run:
+
+#[ ec2-user@ip-172-31-29-250 ~/expense-ansible-vault ]$ ansible-playbook main.yaml -e component=db
+#ERROR! Attempting to decrypt but no vault secrets found
+
+#2nd run:
+
+# [ ec2-user@ip-172-31-29-250 ~/expense-ansible-vault ]$ ansible-playbook main.yaml -e component=db --ask-vault-pass
+# Vault password:
+# [WARNING]: Found variable using reserved name: remote_user
+
+# PLAY [Configuring db Server] *********************************************************************************************************
+
+# TASK [Gathering Facts] ***************************************************************************************************************
+# ok: [db.mydevops-learning.cloud]
+
+# TASK [db : Install MySQL Server 8.0.x] ***********************************************************************************************
+# ok: [db.mydevops-learning.cloud]
+
+# TASK [db : Start and Enable MySql service] *******************************************************************************************
+# ok: [db.mydevops-learning.cloud]
+
+# TASK [db : Install Python dependencies for mysql (PyMySQL)] **************************************************************************
+# ok: [db.mydevops-learning.cloud]
+
+# TASK [db : check if mysql root password is already setup or not] *********************************************************************
+# ok: [db.mydevops-learning.cloud]
+
+# TASK [db : print mysql_output] *******************************************************************************************************
+# ok: [db.mydevops-learning.cloud] => {
+#     "msg": "MySQL Register Output is: {'changed': False, 'connector_name': 'pymysql', 'connector_version': '1.1.0', 'version': {'major': 8, 'minor': 0, 'release': 36, 'suffix': '', 'full': '8.0.36'}, 'failed': False}"
+# }
+
+# TASK [db : setup root password now] **************************************************************************************************
+# skipping: [db.mydevops-learning.cloud]
